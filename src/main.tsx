@@ -3,6 +3,13 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import { QuickExecuteWindow } from './components/dashboard/QuickExecute/QuickExecuteWindow';
 import { DetachedWindow } from './components/dashboard/DetachedWindow';
+import { loadSettings } from "./settings";
+import { applySettings } from "./services/applySettings";
+
+loadSettings().then(cfg => {
+  applySettings(cfg);
+});
+
 
 function blockDevTools() {
   document.addEventListener('keydown', (e) => {
