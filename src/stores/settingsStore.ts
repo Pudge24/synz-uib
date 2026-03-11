@@ -243,3 +243,23 @@ export async function updateClientSetting<K extends keyof ClientSettings>(
     client: { ...settings.client, [key]: value },
   });
 }
+
+import { watch } from "vue";
+import { saveAllSettings } from "../services/saveSettings";
+
+watch(
+  () => ({
+    theme: settings.theme,
+    fontSize: settings.fontSize,
+    tabSize: settings.tabSize,
+    wordWrap: settings.wordWrap,
+    minimap: settings.minimap,
+    autoSave: settings.autoSave,
+    autoFormat: settings.autoFormat,
+    lineNumbers: settings.lineNumbers,
+    renderWhitespace: settings.renderWhitespace,
+    renderControlCharacters: settings.renderControlCharacters,
+  }),
+  () => saveAllSettings(),
+  { deep: true }
+);
